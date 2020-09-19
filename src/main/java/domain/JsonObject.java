@@ -9,13 +9,4 @@ import lombok.Data;
 public class JsonObject {
     String status;
     String message;
-
-
-    @Override
-    public String toString() {
-        return "JsonObject{" +
-                "status='" + status + '\'' +
-                ", message='" + message + '\'' +
-                '}';
-    }
 }
