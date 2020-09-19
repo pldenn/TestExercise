@@ -11,7 +11,7 @@ class ManagerTest {
     Manager manager = new Manager();
 
     @Test
-    public void shouldCheckStatusAndMessage() throws IOException {
+    public void shouldCheckStatusAndMessage(){
         String method = "GET";
         String headerName = "Cookie";
         String headerValue = "sails.sid=s%3Art4wV8oSdI8deR8c-dNhh0p1qcOMWRuP.Ivcch%2F0QY47pb2m6I54Zg44zO09UBXLZ2MouCINTG7A";
@@ -19,12 +19,16 @@ class ManagerTest {
 
         ResponseBody response = manager.getRequest(url, method, headerName, headerValue);
         Gson gson = new Gson();
-        JsonObject actual = gson.fromJson(response.string(), JsonObject.class);
+        JsonObject actual = null;
+
+        try {
+            actual = gson.fromJson(response.string(), JsonObject.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         JsonObject expected = new JsonObject("pass", "OAuth-1.0a signature verification was successful");
-
-        Assertions.assertNotNull(expected);
+        Assertions.assertNotNull(actual);
         Assertions.assertEquals(expected, actual);
-
     }
 }
