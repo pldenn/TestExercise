@@ -1,29 +1,23 @@
 package manager;
 
+import lombok.Data;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.ResponseBody;
 
-import java.io.IOException;
-
+@Data
 public class Manager {
 
-    public ResponseBody getRequest(String url, String method, String headerName, String headerValue) {
+    private  OkHttpClient client;
+    private  Request request;
 
-        OkHttpClient client = new OkHttpClient().newBuilder()
+    public Manager(String url, String method, String headerName, String headerValue) {
+
+        client = new OkHttpClient().newBuilder()
                 .build();
-        Request request = new Request.Builder()
+        request = new Request.Builder()
                 .url(url)
                 .method(method, null)
                 .addHeader(headerName, headerValue)
                 .build();
-
-        ResponseBody response = null;
-        try {
-            response = client.newCall(request).execute().body();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return response;
     }
 }
