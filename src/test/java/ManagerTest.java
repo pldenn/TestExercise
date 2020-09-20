@@ -1,5 +1,5 @@
 import com.google.gson.Gson;
-import domain.JsonObject;
+import domain.JsonEntity;
 import manager.Manager;
 import okhttp3.ResponseBody;
 import org.junit.jupiter.api.Assertions;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
 class ManagerTest {
-    Manager manager = new Manager();
+    private Manager manager = new Manager();
 
     @Test
     public void shouldCheckStatusAndMessage(){
@@ -19,16 +19,17 @@ class ManagerTest {
 
         ResponseBody response = manager.getRequest(url, method, headerName, headerValue);
         Gson gson = new Gson();
-        JsonObject actual = null;
+        JsonEntity actual = null;
 
         try {
-            actual = gson.fromJson(response.string(), JsonObject.class);
+            actual = gson.fromJson(response.string(), JsonEntity.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        JsonObject expected = new JsonObject("pass", "OAuth-1.0a signature verification was successful");
         Assertions.assertNotNull(actual);
+
+        JsonEntity expected = new JsonEntity("pass", "OAuth-1.0a signature verification was successful");
         Assertions.assertEquals(expected, actual);
     }
 }

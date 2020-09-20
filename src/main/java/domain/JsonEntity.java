@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class JsonObject {
-    String status;
-    String message;
+public class JsonEntity {
+    private String status;
+    private String message;
 }
