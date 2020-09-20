@@ -7,8 +7,8 @@ import okhttp3.Request;
 @Data
 public class Manager {
 
-    private  OkHttpClient client;
-    private  Request request;
+    private OkHttpClient client;
+    private Request request;
 
     public Manager(String url, String method, String headerName, String headerValue) {
 
